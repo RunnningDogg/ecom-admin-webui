@@ -46,10 +46,22 @@ export default [
     ],
   },
   {
-    name: 'list.table-list',
+    name: '发货表',
     icon: 'table',
     path: '/list',
     component: './TableList',
+  },
+  {
+    name: '发货数据分析',
+    icon: 'PieChartOutlined',
+    path: '/newpage',
+    component: './NewPage',
+  },
+  {
+    name: '发货表格',
+    icon: 'table',
+    path: '/table',
+    component: './TablePage',
   },
   {
     path: '/',

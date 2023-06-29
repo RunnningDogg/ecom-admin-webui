@@ -72,6 +72,7 @@ const handleRemove = async (selectedRows: API.RuleListItem[]) => {
   try {
     await removeRule({
       key: selectedRows.map((row) => row.key),
+      method: 'post',
     });
     hide();
     message.success('Deleted successfully and will refresh soon');
@@ -243,6 +244,7 @@ const TableList: React.FC = () => {
 
   return (
     <PageContainer>
+      {/* 定义表格*/}
       <ProTable<API.RuleListItem, API.PageParams>
         headerTitle={intl.formatMessage({
           id: 'pages.searchTable.title',
@@ -272,6 +274,7 @@ const TableList: React.FC = () => {
           },
         }}
       />
+
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -311,6 +314,8 @@ const TableList: React.FC = () => {
           </Button>
         </FooterToolbar>
       )}
+
+      {/*新建时候的浮层表单*/}
       <ModalForm
         title={intl.formatMessage({
           id: 'pages.searchTable.createForm.newRule',
@@ -346,6 +351,7 @@ const TableList: React.FC = () => {
         />
         <ProFormTextArea width="md" name="desc" />
       </ModalForm>
+
       <UpdateForm
         onSubmit={async (value) => {
           const success = await handleUpdate(value);
