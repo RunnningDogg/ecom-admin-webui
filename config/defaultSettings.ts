@@ -15,7 +15,7 @@ const Settings: ProLayoutProps & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: '肥茹跨度电商有限公司',
+  title: '肥茹跨境电商有限公司',
   pwa: true,
   logo: 'company.svg',
   iconfontUrl: '',

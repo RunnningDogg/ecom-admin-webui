@@ -1,5 +1,5 @@
 import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
+import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 
 type DirectLogisticItem = {
@@ -313,60 +313,62 @@ const columns2: ProColumns<DirectLogisticItem>[] = [
 
 export default () => {
   return (
-    <ProTable<DirectLogisticItem>
-      columns={columns2}
-      request={(params, sorter, filter) => {
-        // 表单搜索项会从 params 传入，传递给后端接口。
-        console.log(params, sorter, filter);
-        return Promise.resolve({
-          data: directLogisticDataSource,
-          success: true,
-        });
-      }}
-      rowKey="key"
-      pagination={{
-        showQuickJumper: true,
-      }}
-      search={{
-        layout: 'vertical',
-        defaultCollapsed: true,
-      }}
-      dateFormatter="string"
-      toolbar={{
-        title: '直发物流表格',
-        tooltip: '这是直发物流表格',
-      }}
-      toolBarRender={() => [
-        <Button key="danger" danger>
-          危险按钮
-        </Button>,
-        <Button key="show">上传Excel文档(管理员)</Button>,
-        <Button type="primary" key="primary">
-          一键导出EXCEL
-        </Button>,
-      ]}
-      columnsState={{
-        defaultValue: {
-          // 配置初始值
-          index: { show: false },
-          receiverPostalCode: { show: false },
-          receiverCity: { show: false },
-          receiverProvince: { show: false },
-          storeDeliveryCode: { show: false },
-          storeDeliveryName: { show: false },
-          productWeight: { show: false },
-          productLength: { show: false },
-          productWidth: { show: false },
-          productHeight: { show: false },
-          exceptionReason: { show: false },
-        },
-        onChange: (mapObj) => {
-          /* 注意：如果设置持久化，不要在该函数中再额外设置columnsState的值，否则死循环 */
-          console.log(mapObj); // {useName: { show: true },age: { show: false},…}
-        },
-        persistenceKey: 'infoTableSetting', // 持久化列的key，用于判断是否是同一个table,会存在缓存里去
-        persistenceType: 'localStorage', // 持久化列的类型，localStorage 设置在关闭浏览器后也是存在的，sessionStorage 关闭浏览器后会丢失
-      }}
-    />
+    <PageContainer>
+      <ProTable<DirectLogisticItem>
+        columns={columns2}
+        request={(params, sorter, filter) => {
+          // 表单搜索项会从 params 传入，传递给后端接口。
+          console.log(params, sorter, filter);
+          return Promise.resolve({
+            data: directLogisticDataSource,
+            success: true,
+          });
+        }}
+        rowKey="key"
+        pagination={{
+          showQuickJumper: true,
+        }}
+        search={{
+          layout: 'vertical',
+          defaultCollapsed: true,
+        }}
+        dateFormatter="string"
+        toolbar={{
+          title: '直发物流表格',
+          tooltip: '这是直发物流表格',
+        }}
+        toolBarRender={() => [
+          <Button key="danger" danger>
+            危险按钮
+          </Button>,
+          <Button key="show">上传Excel文档(管理员)</Button>,
+          <Button type="primary" key="primary">
+            一键导出EXCEL
+          </Button>,
+        ]}
+        columnsState={{
+          defaultValue: {
+            // 配置初始值
+            index: { show: false },
+            receiverPostalCode: { show: false },
+            receiverCity: { show: false },
+            receiverProvince: { show: false },
+            storeDeliveryCode: { show: false },
+            storeDeliveryName: { show: false },
+            productWeight: { show: false },
+            productLength: { show: false },
+            productWidth: { show: false },
+            productHeight: { show: false },
+            exceptionReason: { show: false },
+          },
+          onChange: (mapObj) => {
+            /* 注意：如果设置持久化，不要在该函数中再额外设置columnsState的值，否则死循环 */
+            console.log(mapObj); // {useName: { show: true },age: { show: false},…}
+          },
+          persistenceKey: 'infoTableSetting', // 持久化列的key，用于判断是否是同一个table,会存在缓存里去
+          persistenceType: 'localStorage', // 持久化列的类型，localStorage 设置在关闭浏览器后也是存在的，sessionStorage 关闭浏览器后会丢失
+        }}
+      />
+    </PageContainer>
   );
 };

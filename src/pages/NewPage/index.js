@@ -215,7 +215,7 @@ const DemoPie = () => {
           </Space>
         </Col>
 
-        <Col span={3}>
+        <Col span={5}>
           <Space direction="vertical" size="small">
             <div>国家 </div>
             <Select
@@ -230,7 +230,7 @@ const DemoPie = () => {
           </Space>
         </Col>
 
-        <Col span={3}>
+        <Col span={4}>
           <Space direction="vertical" size="small">
             <div>签收状态 </div>
             <Select
@@ -244,7 +244,7 @@ const DemoPie = () => {
             />
           </Space>
         </Col>
-        <Col span={6}>
+        <Col span={3}>
           <Button type="primary">查询</Button>
         </Col>
 
