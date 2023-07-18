@@ -1,12 +1,14 @@
 // @ts-ignore
 /* eslint-disable */
 import { request } from '@umijs/max';
+import {API} from "@/services/ant-design-pro/typings";
 
 /** 获取当前的用户 GET /api/currentUser */
 export async function currentUser(options?: { [key: string]: any }) {
   return request<{
     data: API.CurrentUser;
-  }>('/api/currentUser', {
+  }>('/api/user/current', {
+    // currentUser
     method: 'GET',
     ...(options || {}),
   });
@@ -14,7 +16,8 @@ export async function currentUser(options?: { [key: string]: any }) {
 
 /** 退出登录接口 POST /api/login/outLogin */
 export async function outLogin(options?: { [key: string]: any }) {
-  return request<Record<string, any>>('/api/login/outLogin', {
+  return request<Record<string, any>>('/api/user/logout', {
+    // /api/login/outLogin
     method: 'POST',
     ...(options || {}),
   });
@@ -22,7 +25,8 @@ export async function outLogin(options?: { [key: string]: any }) {
 
 /** 登录接口 POST /api/login/account */
 export async function login(body: API.LoginParams, options?: { [key: string]: any }) {
-  return request<API.LoginResult>('/api/login/account', {
+  return request<API.LoginResult>('/api/user/login', {
+    // /api/login/account
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -32,54 +36,35 @@ export async function login(body: API.LoginParams, options?: { [key: string]: an
   });
 }
 
-/** 此处后端没有提供注释 GET /api/notices */
-export async function getNotices(options?: { [key: string]: any }) {
-  return request<API.NoticeIconList>('/api/notices', {
-    method: 'GET',
-    ...(options || {}),
-  });
-}
-
-/** 获取规则列表 GET /api/rule */
-export async function rule(
-  params: {
-    // query
-    /** 当前的页码 */
-    current?: number;
-    /** 页面的容量 */
-    pageSize?: number;
-  },
+// 表格api 2023年07月04日
+export async function queryDetailedDirectLogistic(
+  body?: { [key: string]: any },
   options?: { [key: string]: any },
 ) {
-  return request<API.RuleList>('/api/rule', {
-    method: 'GET',
-    params: {
-      ...params,
+  return request<API.DirectQueryResult>('/api/logistic/query', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
+    data: body,
     ...(options || {}),
   });
 }
 
-/** 新建规则 PUT /api/rule */
-export async function updateRule(options?: { [key: string]: any }) {
-  return request<API.RuleListItem>('/api/rule', {
-    method: 'PUT',
-    ...(options || {}),
-  });
-}
 
-/** 新建规则 POST /api/rule */
-export async function addRule(options?: { [key: string]: any }) {
-  return request<API.RuleListItem>('/api/rule', {
+export async function queryDetailedDirectLength(body: {[key: string]: any}){
+  return request('/api/logistic/count/table',{
     method: 'POST',
-    ...(options || {}),
-  });
+    data: body
+  })
 }
 
-/** 删除规则 DELETE /api/rule */
-export async function removeRule(options?: { [key: string]: any }) {
-  return request<Record<string, any>>('/api/rule', {
+// 根据条件获取summary表格的长度
+export async function querySummaryLength(body: API.TableParams){
+  return request('/api/logistic/count/summary', {
     method: 'POST',
-    ...(options || {}),
-  });
+    data: body
+  })
 }
+
+

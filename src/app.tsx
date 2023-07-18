@@ -10,6 +10,7 @@ import { errorConfig } from './requestErrorConfig';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import React from 'react';
 import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDropdown';
+import {API} from "@/services/ant-design-pro/typings";
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -55,14 +56,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     // actionsRender 是渲染
     actionsRender: () => [],
     avatarProps: {
-      src: initialState?.currentUser?.avatar,
+      // initialState?.currentUser?.avatar
+      src: "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png",
       title: <AvatarName />,
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
       },
     },
     waterMarkProps: {
-      content: initialState?.currentUser?.name,
+      content: initialState?.currentUser?.userName,
     },
     footerRender: () => <Footer />,
     onPageChange: () => {

@@ -34,23 +34,18 @@ export default [
     ],
   },
   {
-    name: '发货表',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    path: '/logistic/summary',
+    name: '物流数据汇总',
+    icon: 'experiment',
+    component: './Summary',
   },
   {
-    name: '发货数据分析',
-    icon: 'PieChartOutlined',
-    path: '/newpage',
-    component: './NewPage',
-  },
-  {
-    name: '发货表格',
+    path: '/logistic/table',
+    name: '物流数据明细',
     icon: 'table',
-    path: '/table',
     component: './TablePage',
   },
+
   {
     path: '/',
     redirect: '/welcome',
